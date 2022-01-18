@@ -1,6 +1,7 @@
 package Main;
 import java.io.IOException;
 
+import Database.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +16,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("/View/MainScene.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/View/LoginScreen.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Inventory Application");
             primaryStage.setScene(scene);
@@ -25,6 +26,8 @@ public class Main extends Application {
         }
     }
     public static void main(String[] args) {
+        JDBC.openConnection();
         launch(args);
+        JDBC.closeConnection();
     }
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="640.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainScreen">
+   <children>
+      <Label layoutX="393.0" layoutY="14.0" text="Schedule Software">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <AnchorPane layoutX="61.0" layoutY="67.0" prefHeight="260.0" prefWidth="825.0" style="-fx-border-width: 1px; -fx-border-color: black; -fx-border-radius: 5px; -fx-padding: 5px;">
+         <children>
+            <TableView layoutX="11.0" layoutY="29.0" prefHeight="181.0" prefWidth="780.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <Button layoutX="11.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" text="Add" />
+            <Button layoutX="73.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" text="Modify" />
+            <Button layoutX="135.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" text="Delete" />
+            <Label layoutX="363.0" layoutY="5.0" text="Appointments" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="61.0" layoutY="339.0" prefHeight="260.0" prefWidth="590.0" style="-fx-border-width: 1px; -fx-border-color: black; -fx-border-radius: 5px; -fx-padding: 5px;">
+         <children>
+            <Label layoutX="266.0" layoutY="14.0" text="Customers" />
+            <TableView layoutX="11.0" layoutY="50.0" prefHeight="160.0" prefWidth="575.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <Button layoutX="11.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" text="Add" />
+            <Button layoutX="73.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" text="Modify" />
+            <Button layoutX="135.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" text="Delete" />
+         </children></AnchorPane>
+      <AnchorPane layoutX="684.0" layoutY="339.0" prefHeight="260.0" prefWidth="180.0" style="-fx-border-width: 1px; -fx-border-color: black; -fx-border-radius: 5px; -fx-padding: 5px;">
+         <children>
+            <Label layoutX="79.0" layoutY="14.0" text="Controls" />
+            <Button layoutX="12.0" layoutY="190.0" mnemonicParsing="false" prefWidth="178.0" text="Exit" />
+            <Button layoutX="12.0" layoutY="157.0" mnemonicParsing="false" prefWidth="178.0" text="Appointment Schedule Report" />
+            <Button layoutX="12.0" layoutY="50.0" mnemonicParsing="false" prefWidth="178.0" text="View Appointments" />
+            <Button layoutX="12.0" layoutY="87.0" minWidth="155.0" mnemonicParsing="false" prefWidth="178.0" text="Appointment Type Report" />
+            <Button layoutX="12.0" layoutY="123.0" minWidth="155.0" mnemonicParsing="false" prefWidth="178.0" text="Consultant Schedule Report" />
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
