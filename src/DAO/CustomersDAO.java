@@ -1,6 +1,8 @@
 package DAO;
 
+import Controller.MainScreen;
 import Database.JDBC;
+import Model.Appointments;
 import Model.Customers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +18,28 @@ public class CustomersDAO {
         getCustomers();
         return customersList;
     }
-
+    public static ResultSet modifyCustomers() {
+        String sql = String.format("SELECT * FROM customers WHERE Customer_ID=%s.", MainScreen.getCustomerToModify().getCustomer_ID());
+        try {
+            PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
+            ResultSet sqlQueryResult = sqlQuery.executeQuery();
+            return sqlQueryResult;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static ObservableList<Customers> removeCustomer() throws SQLException {
+        String sql = String.format("DELETE FROM customers WHERE Customer_ID=%s.", MainScreen.getCustomerToModify().getCustomer_ID());
+        try {
+            PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
+            sqlQuery.executeUpdate();
+            return getAllCustomers();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return getAllCustomers();
+        }
+    }
     public static void getCustomers() {
         try {
             customersList.clear();

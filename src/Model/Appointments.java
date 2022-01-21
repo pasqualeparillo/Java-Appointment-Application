@@ -32,6 +32,10 @@ public class Appointments {
         User_ID = user_ID;
         Contact_ID = contact_ID;
     }
+    public Appointments(int appointment_ID, String type) {
+        this.Appointment_ID = appointment_ID;
+        this.Type = type;
+    }
     /**
      * Appointment id getter
      */
@@ -146,6 +150,7 @@ public class Appointments {
      * user_id setter
      * @param user_ID
      */
+
     public void setUser_ID(int user_ID) {
         User_ID = user_ID;
     }
