@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ModifyCustomer">
+    <children>
+        <Label layoutX="149.0" layoutY="14.0" prefHeight="18.0" prefWidth="102.0" text="Modify Customer">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <TextField fx:id="customerID" disable="true" layoutX="158.0" layoutY="84.0" />
+        <TextField fx:id="customerName" layoutX="158.0" layoutY="121.0" />
+        <TextField fx:id="customerAddress" layoutX="158.0" layoutY="163.0" />
+        <TextField fx:id="customerPostalCode" layoutX="157.0" layoutY="199.0" />
+        <TextField fx:id="customerZip" layoutX="158.0" layoutY="313.0" />
+        <TextField fx:id="customerCountry" disable="true" layoutX="157.0" layoutY="275.0" />
+        <Label layoutX="41.0" layoutY="88.0" text="ID" />
+        <Label layoutX="41.0" layoutY="125.0" prefHeight="18.0" prefWidth="93.0" text="Customer Name" />
+        <Label layoutX="41.0" layoutY="167.0" text="Address #1" />
+        <Label layoutX="41.0" layoutY="203.0" prefHeight="18.0" prefWidth="94.0" text="Postal Code" />
+        <Label layoutX="41.0" layoutY="316.0" prefHeight="18.0" prefWidth="61.0" text="Zip" />
+        <Label fx:id="labelChange" layoutX="41.0" layoutY="283.0" text="Country" />
+        <Label layoutX="41.0" layoutY="240.0" text="City" />
+        <Button layoutX="42.0" layoutY="460.0" mnemonicParsing="false" onAction="#updateCustomer" text="Save" />
+        <Button layoutX="108.0" layoutY="460.0" mnemonicParsing="false" onAction="#exitPage" text="Cancel" />
+        <TextField fx:id="customerPhone" layoutX="157.0" layoutY="352.0" />
+        <Label layoutX="41.0" layoutY="356.0" text="Phone Number" />
+        <ComboBox fx:id="customerCity" layoutX="156.0" layoutY="236.0" onAction="#setCountry" prefWidth="150.0" />
+
+    </children>
+</AnchorPane>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TypeReport">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="86.0" prefHeight="160.0" prefWidth="260.0">
+         <children>
+            <RadioButton layoutX="14.0" layoutY="5.0" mnemonicParsing="false" onAction="#changeMonth" selected="true" text="January">
+               <toggleGroup>
+                  <ToggleGroup fx:id="monthToggle" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton layoutX="14.0" layoutY="31.0" mnemonicParsing="false" onAction="#changeMonth" text="February" toggleGroup="$monthToggle" />
+            <RadioButton layoutX="14.0" layoutY="55.0" mnemonicParsing="false" onAction="#changeMonth" text="March" toggleGroup="$monthToggle" />
+            <RadioButton layoutX="14.0" layoutY="80.0" mnemonicParsing="false" onAction="#changeMonth" text="April" toggleGroup="$monthToggle" />
+            <RadioButton layoutX="14.0" layoutY="104.0" mnemonicParsing="false" onAction="#changeMonth" text="May" toggleGroup="$monthToggle" />
+            <RadioButton layoutX="14.0" layoutY="128.0" mnemonicParsing="false" onAction="#changeMonth" text="June" toggleGroup="$monthToggle" />
+            <RadioButton layoutX="130.0" layoutY="128.0" mnemonicParsing="false" onAction="#changeMonth" text="December" toggleGroup="$monthToggle" />
+            <RadioButton layoutX="130.0" layoutY="104.0" mnemonicParsing="false" onAction="#changeMonth" text="November" toggleGroup="$monthToggle" />
+            <RadioButton layoutX="130.0" layoutY="80.0" mnemonicParsing="false" onAction="#changeMonth" text="October" toggleGroup="$monthToggle" />
+            <RadioButton layoutX="130.0" layoutY="55.0" mnemonicParsing="false" onAction="#changeMonth" text="September" toggleGroup="$monthToggle" />
+            <RadioButton layoutX="130.0" layoutY="31.0" mnemonicParsing="false" onAction="#changeMonth" text="August" toggleGroup="$monthToggle" />
+            <RadioButton layoutX="130.0" layoutY="6.0" mnemonicParsing="false" onAction="#changeMonth" text="July" toggleGroup="$monthToggle" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="326.0" layoutY="86.0" prefHeight="200.0" prefWidth="260.0">
+         <children>
+            <TableView fx:id="typeTable" layoutX="1.0" prefHeight="200.0" prefWidth="260.0">
+              <columns>
+                <TableColumn fx:id="typeColumn" prefWidth="131.4000244140625" text="Type" />
+                <TableColumn fx:id="countColumn" prefWidth="127.79998779296875" text="Count" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <Button layoutX="534.0" layoutY="361.0" mnemonicParsing="false" onAction="#exitPage" text="Close" />
+      <Label layoutX="242.0" layoutY="20.0" text="Appointment by Type">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

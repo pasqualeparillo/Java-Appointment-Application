@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportScreen">
+   <children>
+      <AnchorPane layoutX="20.0" layoutY="40.0" prefHeight="200.0" prefWidth="560.0">
+         <children>
+            <TableView fx:id="appointmentsTable" prefHeight="200.0" prefWidth="560.0">
+               <columns>
+                  <TableColumn fx:id="Appointment_ID" prefWidth="75.0" text="Appointment_ID" />
+                  <TableColumn fx:id="Appointment_Customer_ID" prefWidth="75.0" text="Customer_ID" />
+                  <TableColumn fx:id="Appointment_User_ID" prefWidth="75.0" text="User_ID" />
+                  <TableColumn fx:id="Appointment_Contact_ID" prefWidth="75.0" text="Contact_ID" />
+                  <TableColumn fx:id="Appointment_Title" prefWidth="75.0" text="Title" />
+                  <TableColumn fx:id="Appointment_Description" prefWidth="75.0" text="Description" />
+                  <TableColumn fx:id="Appointment_Location" prefWidth="75.0" text="Location" />
+                  <TableColumn fx:id="Appointment_Type" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="Appointment_Start" prefWidth="75.0" text="Start" />
+                  <TableColumn fx:id="Appointment_End" prefWidth="75.0" text="End" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="263.0" layoutY="14.0" text="Reports View">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <RadioButton layoutX="266.0" layoutY="279.0" mnemonicParsing="false" onAction="#setMonthlyAppointments" text="Monthly Appointments">
+         <toggleGroup>
+            <ToggleGroup fx:id="reportToggle" />
+         </toggleGroup></RadioButton>
+      <RadioButton layoutX="118.0" layoutY="279.0" mnemonicParsing="false" onAction="#setWeeklyAppointments" text="Weekly Appointments" toggleGroup="$reportToggle" />
+      <RadioButton layoutX="416.0" layoutY="279.0" mnemonicParsing="false" onAction="#setAllProjects" selected="true" text="All Appointments" toggleGroup="$reportToggle" />
+      <Button layoutX="534.0" layoutY="360.0" mnemonicParsing="false" onAction="#exitPage" text="Close" />
+   </children>
+</AnchorPane>
