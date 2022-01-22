@@ -21,7 +21,7 @@ public class DivisionsDAO {
     public static void getDivisions() {
         try {
             divisionsList.clear();
-            String sql = "SELECT * FROM Divisions";
+            String sql = "SELECT * FROM first_level_divisions";
             PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
             ResultSet sqlQueryResult = sqlQuery.executeQuery();
             while(sqlQueryResult.next()) {

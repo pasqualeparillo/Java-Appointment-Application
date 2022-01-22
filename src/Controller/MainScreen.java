@@ -186,6 +186,24 @@ public class MainScreen implements Initializable {
         switchScene(actionEvent, "View Reports");
     }
     /**
+     * @param actionEvent
+     * @throws IOException
+     */
+    @FXML
+    public void addAppointment(ActionEvent actionEvent) {
+        fxmlPath = "/View/AddAppointment.fxml";
+        switchScene(actionEvent, "Add Appointment");
+    }
+    /**
+     * @param actionEvent
+     * @throws IOException
+     */
+    @FXML
+    public void addCustomer(ActionEvent actionEvent) {
+        fxmlPath = "/View/AddCustomer.fxml";
+        switchScene(actionEvent, "Add Customer");
+    }
+    /**
      * returns customer to modify, used in other scenes
      * */
     public static Customers getCustomerToModify() {
@@ -218,5 +236,9 @@ public class MainScreen implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    public void exitProgram() {
+        System.exit(0);
     }
 }

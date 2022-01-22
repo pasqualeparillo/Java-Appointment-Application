@@ -26,7 +26,7 @@
                   <TableColumn fx:id="Appointment_End" prefWidth="75.0" text="End" />
               </columns>
             </TableView>
-            <Button layoutX="11.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" text="Add" />
+            <Button layoutX="11.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" onAction="#addAppointment" text="Add" />
             <Button layoutX="73.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" onAction="#modifyAppointment" text="Modify" />
             <Button layoutX="135.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" onAction="#deleteAppointment" text="Delete" />
             <Label layoutX="363.0" layoutY="5.0" text="Appointments" />
@@ -46,14 +46,14 @@
 
               </columns>
             </TableView>
-            <Button layoutX="11.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" text="Add" />
+            <Button layoutX="11.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" onAction="#addCustomer" text="Add" />
             <Button layoutX="73.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" onAction="#modifyCustomer" text="Modify" />
             <Button layoutX="135.0" layoutY="220.0" minWidth="55.0" mnemonicParsing="false" onAction="#deleteCustomer" text="Delete" />
          </children></AnchorPane>
       <AnchorPane layoutX="684.0" layoutY="339.0" prefHeight="260.0" prefWidth="180.0" style="-fx-border-width: 1px; -fx-border-color: black; -fx-border-radius: 5px; -fx-padding: 5px;">
          <children>
             <Label layoutX="79.0" layoutY="14.0" text="Reports" />
-            <Button layoutX="12.0" layoutY="190.0" mnemonicParsing="false" prefWidth="178.0" text="Exit" />
+            <Button layoutX="12.0" layoutY="190.0" mnemonicParsing="false" onAction="#exitProgram" prefWidth="178.0" text="Exit" />
             <Button layoutX="12.0" layoutY="157.0" mnemonicParsing="false" prefWidth="178.0" text="Appointment Schedule Report" />
             <Button layoutX="12.0" layoutY="50.0" mnemonicParsing="false" onAction="#viewReports" prefWidth="178.0" text="Appointments" />
             <Button layoutX="12.0" layoutY="87.0" minWidth="155.0" mnemonicParsing="false" onAction="#viewTypeReport" prefWidth="178.0" text="Appointment Month/Type" />
