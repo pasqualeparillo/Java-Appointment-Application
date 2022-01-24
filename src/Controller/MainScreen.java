@@ -22,9 +22,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
+/**
+ * MainScreen controller
+ */
 public class MainScreen implements Initializable {
 
     private static Customers customerToModify;
@@ -88,7 +93,7 @@ public class MainScreen implements Initializable {
         appointmentToModify = selectedItem;
         if(selectedItem != null) {
             fxmlPath = "/View/ModifyAppointment.fxml";
-            switchScene(actionEvent, "Modify Product");
+            switchScene(actionEvent, "Modify Appointment");
         } else {
             Alert alertConfirm = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
             alertConfirm.setTitle("No appointment selected");
@@ -169,25 +174,32 @@ public class MainScreen implements Initializable {
     }
 
     /**
-     *
+     * opens reports scene
      * @param actionEvent
-     * @throws IOException
      */
     public void viewReports(ActionEvent actionEvent) {
         fxmlPath = "/View/ReportScreen.fxml";
-        switchScene(actionEvent, "View Reports");
+        switchScene(actionEvent, "Appointments By Time");
     }
-
     /**
+     * opens past appointments scene
+     * @param actionEvent
+     */
+    public void pastAppointments(ActionEvent actionEvent) {
+        fxmlPath = "/View/PastAppointments.fxml";
+        switchScene(actionEvent, "Past Appointments Report");
+    }
+    /**
+     * opens type report scene
      * @param actionEvent
      */
     public void viewTypeReport(ActionEvent actionEvent) {
         fxmlPath = "/View/TypeReport.fxml";
-        switchScene(actionEvent, "View Reports");
+        switchScene(actionEvent, "Appointment By Type Report");
     }
     /**
+     * opens addappointment scene
      * @param actionEvent
-     * @throws IOException
      */
     @FXML
     public void addAppointment(ActionEvent actionEvent) {
@@ -195,8 +207,8 @@ public class MainScreen implements Initializable {
         switchScene(actionEvent, "Add Appointment");
     }
     /**
+     * Opens add customer scene
      * @param actionEvent
-     * @throws IOException
      */
     @FXML
     public void addCustomer(ActionEvent actionEvent) {
@@ -204,11 +216,29 @@ public class MainScreen implements Initializable {
         switchScene(actionEvent, "Add Customer");
     }
     /**
+     * Opens reports by user
+     */
+    @FXML
+    public void reportByUser(ActionEvent actionEvent) {
+        fxmlPath = "/View/ByUserReport.fxml";
+        switchScene(actionEvent, "Appointments By User");
+    }
+    /**
+     * Opens reports by contact
+     */
+    @FXML
+    public void reportByContact(ActionEvent actionEvent) {
+        fxmlPath = "/View/ByContactReport.fxml";
+        switchScene(actionEvent, "Appointments By Contact");
+    }
+    /**
      * returns customer to modify, used in other scenes
      * */
     public static Customers getCustomerToModify() {
         return customerToModify;
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

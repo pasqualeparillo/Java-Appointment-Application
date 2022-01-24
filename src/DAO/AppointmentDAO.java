@@ -6,6 +6,7 @@ import Model.Appointments;
 import Model.Customers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 
 import java.sql.*;
 import java.time.DayOfWeek;
@@ -16,9 +17,13 @@ import java.time.temporal.TemporalAdjusters;
 
 import static java.sql.Timestamp.valueOf;
 
+/**
+ * AppointmentDAO file makes all SQL calls
+ */
 public class AppointmentDAO {
     public static ObservableList<Appointments> appointmentsList = FXCollections.observableArrayList();
     public static ObservableList<Appointments> appointmentTypeList = FXCollections.observableArrayList();
+    public static ObservableList<Appointments> appointmentContactList = FXCollections.observableArrayList();
     /**
      * returns all appointments
      */
@@ -26,21 +31,34 @@ public class AppointmentDAO {
         getAppointments();
         return appointmentsList;
     }
+
+    /**
+     * returns appointments by week
+     * @return
+     * @throws SQLException
+     */
     public static ObservableList<Appointments> returnAppointmentsByWeek() throws SQLException {
         getAppointmentsByWeek();
         return appointmentsList;
     }
+
+    /**
+     * returns appointments by month
+     * @return
+     * @throws SQLException
+     */
     public static ObservableList<Appointments> returnAppointmentsByMonth() throws SQLException {
         getAppointmentsByMonth();
         return appointmentsList;
     }
 
     /**
-     * Gets & returns appointment by customer ID
+     * Gets and returns appointment by customer ID
      * @param Customer_ID
      */
     public static ResultSet getByCustomer(int Customer_ID) {
         String sql = String.format("SELECT * FROM appointments WHERE Customer_ID=%s.", Customer_ID);
+
         try {
             PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
             ResultSet sqlQueryResult = sqlQuery.executeQuery();
@@ -51,24 +69,93 @@ public class AppointmentDAO {
         return null;
     }
     /**
+     * Gets and returns appointment by customer ID
+     * @param uid
+     */
+    public static ObservableList<Appointments> getByUser(int uid) {
+        String sql = String.format("SELECT * FROM appointments WHERE User_ID=%s.", uid);
+        try {
+            PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
+            ResultSet sqlQueryResult = sqlQuery.executeQuery();
+            while (sqlQueryResult.next()) {
+                int Appointment_ID = sqlQueryResult.getInt("Appointment_ID");
+                int Customer_ID = sqlQueryResult.getInt("Customer_ID");
+                int User_ID = sqlQueryResult.getInt("User_ID");
+                int Contact_ID = sqlQueryResult.getInt("Contact_ID");
+                String Title = sqlQueryResult.getString("Title");
+                String Description = sqlQueryResult.getString("Description");
+                String Location = sqlQueryResult.getString("Location");
+                String Type = sqlQueryResult.getString("Type");
+                Timestamp Start = sqlQueryResult.getTimestamp("Start");
+                Timestamp End = sqlQueryResult.getTimestamp("End");
+                Appointments appointments = new Appointments(Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID);
+                appointmentsList.add(appointments);
+                return appointmentsList;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Gets and returns appointment by customer ID
+     * @param uid
+     */
+    public static void getByContact(int uid) {
+        AppointmentDAO.appointmentContactList.clear();
+        String sql = String.format("SELECT * FROM appointments WHERE Contact_ID=%s.", uid);
+        try {
+            PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
+            ResultSet sqlQueryResult = sqlQuery.executeQuery();
+            while (sqlQueryResult.next()) {
+                int Appointment_ID = sqlQueryResult.getInt("Appointment_ID");
+                int Customer_ID = sqlQueryResult.getInt("Customer_ID");
+                int User_ID = sqlQueryResult.getInt("User_ID");
+                int Contact_ID = sqlQueryResult.getInt("Contact_ID");
+                String Title = sqlQueryResult.getString("Title");
+                String Description = sqlQueryResult.getString("Description");
+                String Location = sqlQueryResult.getString("Location");
+                String Type = sqlQueryResult.getString("Type");
+                Timestamp Start = sqlQueryResult.getTimestamp("Start");
+                Timestamp End = sqlQueryResult.getTimestamp("End");
+                Appointments appointments = new Appointments(Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID);
+                appointmentContactList.add(appointments);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+        /**
+     * add appointment
+     */
+    public static void addAppointment(String Title, String Description, String Location, String Type, LocalDateTime start, LocalDateTime end, int customer_ID, int user_ID, int Contact_ID) {
+        try {
+            String sql = String.format("INSERT INTO appointments (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', %s, %s, %s)", Title,  Description,  Location,  Type,  start,  end,  customer_ID,  user_ID,  Contact_ID);
+            JDBC.getConnection().prepareStatement(sql).execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
      * removed selected appointment
      */
     public static ObservableList<Appointments> removeAppointment() throws SQLException {
         String sql = String.format("DELETE FROM appointments WHERE Appointment_ID=%s.", MainScreen.getAppointmentToModify().getAppointment_ID());
         try {
-            PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
-            sqlQuery.executeUpdate();
+            JDBC.getConnection().prepareStatement(sql).execute();
             return getAllAppointments();
         } catch (SQLException e) {
             e.printStackTrace();
             return getAllAppointments();
         }
     }
-    public static void updateAppointment(int appointment_ID, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customer_ID, int user_ID, String customer_name) {
+    public static void updateAppointment(int appointment_ID, String title, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customer_ID, int user_ID, String customer_name, int Contact_ID) {
         try {
-            String sql = String.format("UPDATE appointments set Title='%s', Description='%s', Location='%s', Type='%s', Start='%s', End='%s', Customer_ID=%s, User_ID=%s WHERE Appointment_ID=%s", title, description, location, type, start, end,
-                    customer_ID, user_ID, appointment_ID);
+            String sql = String.format("UPDATE appointments set Title='%s', Description='%s', Location='%s', Type='%s', Start='%s', End='%s', Customer_ID=%s, User_ID=%s, Contact_ID=%s WHERE Appointment_ID=%s", title, description, location, type, start, end,
+                    customer_ID, user_ID, Contact_ID, appointment_ID);
             String customerSql = String.format("UPDATE customers set Customer_Name='%s' WHERE Customer_ID=%s", customer_name, customer_ID);
+
             JDBC.getConnection().prepareStatement(sql).execute();
             JDBC.getConnection().prepareStatement(customerSql).execute();
         } catch (SQLException e) {
@@ -137,7 +224,7 @@ public class AppointmentDAO {
         }
     }
     /**
-     * returns appointment by type & month
+     * returns appointment by type and month
      *
      */
     public static ObservableList<Appointments> getAppointmentByType(int month) throws SQLException {

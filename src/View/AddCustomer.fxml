@@ -4,29 +4,29 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddCustomer">
+<AnchorPane prefHeight="400.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddCustomer">
     <children>
-        <Label layoutX="190.0" layoutY="14.0" prefHeight="18.0" prefWidth="81.0" text="Add Customer">
+        <Label layoutX="129.0" layoutY="14.0" prefHeight="18.0" prefWidth="81.0" text="Add Customer">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Label>
-        <TextField fx:id="addPartID" disable="true" layoutX="157.0" layoutY="80.0" promptText="Auto Gen - Disabled" />
-        <TextField fx:id="addPartName" layoutX="157.0" layoutY="117.0" />
-        <TextField fx:id="addPartInv" layoutX="157.0" layoutY="159.0" />
-        <TextField fx:id="addPartMax" layoutX="158.0" layoutY="274.0" />
-        <TextField fx:id="addPartChangeable" disable="true" layoutX="157.0" layoutY="236.0" />
+        <TextField fx:id="customerID" disable="true" layoutX="157.0" layoutY="80.0" promptText="Auto Gen - Disabled" />
+        <TextField fx:id="customerName" layoutX="157.0" layoutY="117.0" />
+        <TextField fx:id="customerAddress" layoutX="157.0" layoutY="159.0" />
+        <TextField fx:id="customerPostalCode" layoutX="158.0" layoutY="274.0" />
+        <TextField fx:id="customerCountry" disable="true" layoutX="157.0" layoutY="236.0" />
         <Label layoutX="41.0" layoutY="88.0" text="ID" />
         <Label layoutX="41.0" layoutY="125.0" prefHeight="18.0" prefWidth="93.0" text="Customer Name" />
         <Label layoutX="41.0" layoutY="167.0" text="Address" />
         <Label layoutX="41.0" layoutY="277.0" prefHeight="18.0" prefWidth="74.0" text="Postal Code" />
         <Label fx:id="labelChange" layoutX="41.0" layoutY="244.0" text="Country" />
         <Label layoutX="41.0" layoutY="201.0" text="City" />
-        <Button layoutX="42.0" layoutY="460.0" mnemonicParsing="false" text="Save" />
-        <Button layoutX="108.0" layoutY="460.0" mnemonicParsing="false" onAction="#exitPage" text="Cancel" />
-        <TextField layoutX="157.0" layoutY="313.0" />
+        <Button layoutX="222.0" layoutY="360.0" mnemonicParsing="false" onAction="#addCustomer" text="Save" />
+        <Button layoutX="269.0" layoutY="360.0" mnemonicParsing="false" onAction="#exitPage" text="Cancel" />
+        <TextField fx:id="customerPhone" layoutX="157.0" layoutY="313.0" />
         <Label layoutX="41.0" layoutY="317.0" text="Phone Number" />
-      <ComboBox layoutX="156.0" layoutY="197.0" prefWidth="150.0" />
+      <ComboBox fx:id="customerCity" layoutX="156.0" layoutY="197.0" onAction="#setCountry" prefWidth="150.0" />
 
     </children>
 </AnchorPane>

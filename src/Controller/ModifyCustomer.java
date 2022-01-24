@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -22,17 +23,25 @@ import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static DAO.DivisionsDAO.divisionsList;
-
+/**
+ * Modify customer controller
+ */
 public class ModifyCustomer implements Initializable {
     private static String fxmlPath;
     @FXML public ComboBox<String> customerCity;
     @FXML public TextField customerID, customerName, customerAddress, customerPostalCode, customerZip, customerCountry, customerPhone;
+
     @FXML
     private void exitPage(ActionEvent event) {
         fxmlPath = "/View/MainScreen.fxml";
         switchScene(event, "Appointment Management");
     }
+
+    /**
+     * Scene switching helper function
+     * @param event
+     * @param title
+     */
     public void switchScene(ActionEvent event, String title)  {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
@@ -69,6 +78,10 @@ public class ModifyCustomer implements Initializable {
         }
     }
 
+    /**
+     * sets country combo box's
+     * @param event
+     */
     public void setCountry(ActionEvent event) {
         int country_ID = 0;
         for(FirstLevelDivisions Division: DivisionsDAO.divisionsList) {
@@ -88,6 +101,10 @@ public class ModifyCustomer implements Initializable {
                 break;
         }
     }
+
+    /**
+     * sets city combo box's
+     */
     public void setCity() {
         Customers customer = MainScreen.getCustomerToModify();
         int Customer_ID = customer.getCustomer_ID();
@@ -105,18 +122,49 @@ public class ModifyCustomer implements Initializable {
         customerZip.setText(customer.getPostal_Code());
         customerPhone.setText(customer.getPhone());
     }
+
+    /**
+     * Updates customer if form fields are valid
+     * @param event
+     * @throws SQLException
+     */
     @FXML
     public void updateCustomer(ActionEvent event) throws SQLException {
-        int customer_city = 0;
-        for(FirstLevelDivisions Division: DivisionsDAO.divisionsList) {
-            if(Division.getDivision() == customerCity.getValue()) {
-                customer_city = Division.getDivision_ID();
-            } else {
+        if(checkBlank() == false) {
+            int customer_city = 0;
+            for(FirstLevelDivisions Division: DivisionsDAO.divisionsList) {
+                if(Division.getDivision() == customerCity.getValue()) {
+                    customer_city = Division.getDivision_ID();
+                } else {
 
+                }
             }
+            int customer_ID = Integer.parseInt(customerID.getText());
+            CustomersDAO.modifyCustomers(customerName.getText(),customerAddress.getText(), customerPostalCode.getText(), customerPhone.getText(),customer_city, customer_ID );
+            exitPage(event);
         }
-        int customer_ID = Integer.parseInt(customerID.getText());
-        CustomersDAO.modifyCustomers(customerName.getText(),customerAddress.getText(), customerPostalCode.getText(), customerPhone.getText(),customer_city, customer_ID );
-        exitPage(event);
+    }
+    /**
+     * checks if form fields are blank
+     * @return
+     */
+    public boolean checkBlank() {
+        if(
+                customerName.getText().isEmpty() ||
+                        customerAddress.getText().isEmpty() ||
+                        customerPostalCode.getText().isEmpty() ||
+                        customerPhone.getText().isEmpty() ||
+                        customerCity.getValue() == null
+
+        ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR!");
+            alert.setHeaderText("Missing field");
+            alert.setContentText("Please be sure to fill out all fields.");
+            alert.showAndWait();
+            return true;
+        } else {
+            return false;
+        }
     }
 }

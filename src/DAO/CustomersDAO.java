@@ -10,14 +10,33 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
+/**
+ * CustomersDAO handles all SQL calls relating to Customers
+ */
 public class CustomersDAO {
     public static ObservableList<Customers> customersList = FXCollections.observableArrayList();
 
+    /**
+     * gets all customers
+     * @return
+     */
     public static ObservableList<Customers> getAllCustomers() {
         getCustomers();
         return customersList;
     }
+
+    /**
+     * Handles modifying customers
+     * @param customer_name
+     * @param customer_address
+     * @param postal_code
+     * @param phone
+     * @param division_id
+     * @param customer_ID
+     * @throws SQLException
+     */
     public static void modifyCustomers(String customer_name, String customer_address, String postal_code, String phone, int division_id, int customer_ID) throws SQLException {
         String customerSql = String.format("UPDATE customers set Customer_Name='%s', Address='%s', Postal_Code='%s', Phone='%s', Division_ID=%s WHERE Customer_ID=%s", customer_name, customer_address, postal_code, phone, division_id, customer_ID);
         try {
@@ -27,6 +46,29 @@ public class CustomersDAO {
             e.printStackTrace();
         }
     }
+
+    /**
+     * handles adding customres
+     * @param Customer_Name
+     * @param Address
+     * @param Postal_Code
+     * @param Phone
+     * @param Division_ID
+     */
+    public static void addCustomer(String Customer_Name,String  Address,String  Postal_Code,String  Phone, int Division_ID) {
+        try {
+            String sql = String.format("INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES ('%s', '%s', '%s', '%s', %s)", Customer_Name, Address, Postal_Code, Phone, Division_ID);
+            JDBC.getConnection().prepareStatement(sql).execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * handles removing customers
+     * @return
+     * @throws SQLException
+     */
     public static ObservableList<Customers> removeCustomer() throws SQLException {
         String sql = String.format("DELETE FROM customers WHERE Customer_ID=%s.", MainScreen.getCustomerToModify().getCustomer_ID());
         try {
@@ -38,6 +80,10 @@ public class CustomersDAO {
             return getAllCustomers();
         }
     }
+
+    /**
+     * handles fetching all customers
+     */
     public static void getCustomers() {
         try {
             customersList.clear();

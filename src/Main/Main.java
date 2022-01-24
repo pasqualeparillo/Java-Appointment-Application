@@ -1,16 +1,24 @@
 package Main;
-import java.io.IOException;
 
 import Database.JDBC;
-import javafx.application.Application;
+import Model.*;
 import javafx.fxml.FXMLLoader;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Scanner;
+
+/**
+ * Launches the application
+ */
 public class Main extends Application {
     /**
-     * starts the program & renders the stage
+     * Starts the application and opens up the Login Screen
      */
     @Override
     public void start(Stage primaryStage) {
@@ -25,9 +33,15 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
+    /**
+     * opens up the connection with the SQL database
+     * @param args
+     */
     public static void main(String[] args) {
         JDBC.openConnection();
         launch(args);
         JDBC.closeConnection();
+
     }
 }
